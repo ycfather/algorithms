@@ -41,3 +41,18 @@ func Reverse(head *ListNode) *ListNode {
 
 	return prev
 }
+
+func Build(vals []int) *ListNode {
+	if len(vals) == 0 {
+		return nil
+	}
+
+	head := &ListNode{Val: vals[0]}
+	pre := head
+	for i := 1; i < len(vals); i++ {
+		pre.Next = &ListNode{Val: vals[i]}
+		pre = pre.Next
+	}
+
+	return head
+}
