@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func lengthOfLIS(nums []int) int {
+func lengthOfLISByDP(nums []int) int {
 	sz := len(nums)
 	dp := make([]int, sz)
 	for i := 0; i < sz; i++ {
@@ -26,7 +26,33 @@ func lengthOfLIS(nums []int) int {
 	return res
 }
 
+func lengthOfLIS(nums []int) int {
+	piles := 0
+	n := len(nums)
+	top := make([]int, n)
+
+	for i := 0; i < n; i++ {
+		left, right := 0, piles
+		for left < right {
+			mid := (left + right) / 2
+			if nums[i] <= top[mid] {
+				right = mid
+			} else {
+				left = mid + 1
+			}
+		}
+
+		if left == piles {
+			piles++
+		}
+
+		top[left] = nums[i]
+	}
+
+	return piles
+}
+
 func main() {
 	nums := []int{7, 7, 7, 7, 7, 7, 7}
-	fmt.Printf("res: %d\n", lengthOfLIS(nums))
+	fmt.Printf("res: %d\n", lengthOfLISByDP(nums))
 }
