@@ -4,29 +4,6 @@ import (
 	"fmt"
 )
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-func PrettyFormat(head *ListNode) string {
-	if head == nil {
-		return "nil"
-	}
-
-	var str string
-	cursor := head
-	for cursor != nil {
-		str += fmt.Sprintf("[%d]", cursor.Val)
-		if cursor.Next != nil {
-			str += " ---> "
-		}
-		cursor = cursor.Next
-	}
-
-	return str
-}
-
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var l, cursor, prev *ListNode
 	carry := 0
